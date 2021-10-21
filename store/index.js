@@ -1,3 +1,4 @@
+
 import {v4} from 'uuid'
 
 export const state = () => ({
@@ -84,6 +85,7 @@ export const mutations ={
             course:state.newVechicleCourse,
             condition:state.newVechicleCondition
         })
+        state.visibleVechicles=state.vechicles
     },
     REMOVE_VECHICLE(state,id){
         state.vechicles = state.vechicles.filter(item=>item.id!=id)
@@ -99,7 +101,9 @@ export const mutations ={
                 element.course=payload.newCourse;
                 element.condition=payload.newCondition;
             }
-        });
+        })
+        state.visibleVechicles=state.vechicles
+        
     },
     MOVE_UP(state,id){
 
@@ -154,7 +158,7 @@ export const mutations ={
     },
     CALCULATE_FLEET_WORTH(state){
         state.fleetWorth=state.visibleVechicles.reduce((previousVal,actualVal,)=>{
-            return previousVal.price + actualVal.price
+            return previousVal + parseInt(actualVal.price)
         },0)
         console.log(state.fleetWorth)
     }
@@ -185,7 +189,7 @@ export const actions = {
         newCondition:payload.newCondition
         }
     ),
-    calcualteFleetWorth:({commit},payload) => commit('CALCULATE_FLEET_WORTH')
+    calcualteFleetWorth:({commit}) => commit('CALCULATE_FLEET_WORTH')
 
 } 
 
@@ -219,6 +223,9 @@ export const getters ={
     },
     getVisibleVechicles(state){
         return state.visibleVechicles
+    },
+    getWorth(state){
+        return state.fleetWorth;
     }
     
 

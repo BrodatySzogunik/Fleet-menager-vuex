@@ -1,6 +1,7 @@
 <template>
   <div>
   <AddNewVechicle/>
+  <Worth/>
   <div class="row">
     <FleetList v-for="vechicle in vechicles" :key="vechicle.id" :vechicle="vechicle"/>
   </div>
@@ -11,7 +12,11 @@
 import {mapState} from 'vuex'
 
 export default {
-  
+  mounted: function () {
+    this.$nextTick(function () {
+    this.$store.dispatch('calcualteFleetWorth')
+    })
+  },
   computed:{
     vechicles(){
       console.log(this.$store.getters.getVisibleVechicles)

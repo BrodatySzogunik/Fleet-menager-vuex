@@ -11,12 +11,13 @@
 import {mapState} from 'vuex'
 
 export default {
+  
   computed:{
     vechicles(){
-      console.log(this.$store.getters.getVechicles)
-      return this.$store.getters.getVechicles
+      console.log(this.$store.getters.getVisibleVechicles)
+      return this.$store.getters.getVisibleVechicles
     }
-    // mapState(['vechicles'])
+  
     },
     watch:{
       vechicles(){
